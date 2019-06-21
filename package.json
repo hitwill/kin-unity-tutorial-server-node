@@ -1,0 +1,30 @@
+{
+  "name": "kin-node-server",
+  "version": "1.0.7",
+  "description": "Sample server code to work with the Kin Unity SDK client",
+  "main": "server.js",
+  "dependencies": {
+    "kin-node-callback": "^1.0.2",
+    "utf8": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hitwill/kin-sdk-unity-tutorial-server-node.git"
+  },
+  "keywords": [
+    "kin",
+    "blockchain",
+    "unity"
+  ],
+  "author": "Will Gikandi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hitwill/kin-sdk-unity-tutorial-server-node/issues"
+  },
+  "homepage": "https://github.com/hitwill/kin-sdk-unity-tutorial-server-node#readme"
+}
