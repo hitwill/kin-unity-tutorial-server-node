@@ -1,7 +1,7 @@
 //MODIFY THIS FOR YOUR ENVIRONMENT
 const isProduction = false;
-const seed = process.env.PRIVATE_KEY_LDSDFURUVN; //private key/seed (keep private / store in .env file for production)
-const uniqueAppId = '1acd'; //your app id assigned by Kin - you can use 1acd for testing
+const seed = process.env.PRIVATE_KEY_SDKF872; //private key/seed (keep private / store in .env file for production)
+const uniqueAppId = process.env.appID; //your app id assigned by Kin - you can use 1acd for testing
 const maxKinSendable = 10; //just for your security - set max Kin you allow from your server to your app
 const port = process.env.PORT;//if using Heroku: 5000 for localhost and automatic- Else set for your use
 //END MODIFY THIS FOR YOUR ENVIRONMENT
