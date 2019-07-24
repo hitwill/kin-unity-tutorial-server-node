@@ -68,7 +68,8 @@ async function handleRequest(get, post, res) {
 //Whitelists transactions so fees are zero
 function whitelistTransaction(data, res) {
     var response = standardResponse();
-    clientTransaction = utf8.encode(data);
+    //this line is just returning blank so we just hack it below: clientTransaction = utf8.encode(data);
+    clientTransaction = JSON.parse(JSON.stringify(data));
     try {
         response.text = kin.account.whitelistTransaction(clientTransaction);
     } catch (err) {
