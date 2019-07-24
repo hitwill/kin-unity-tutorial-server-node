@@ -56,7 +56,7 @@ async function handleRequest(get, post, res) {
         response = await sendPayment(post.address, post.id, post.memo, post.amount, res);
     } else if (typeof get.whitelist !== 'undefined') {
         //Whitelist a transaction
-        response = await whitelistTransaction(get.data, res);
+        response = await whitelistTransaction(post, res);
     } else {
         //empty request
         response = errorResponse('no get vars');
