@@ -1,8 +1,8 @@
 //MODIFY THIS FOR YOUR ENVIRONMENT
 const isProduction = false;
-const seed = process.env.PRIVATE_KEY_SDKF872; //private key/seed (keep private / store in .env file for production)
-const uniqueAppId = process.env.appID; //your app id assigned by Kin - you can use 1acd for testing
-const maxKinSendable = 10; //just for your security - set max Kin you allow from your server to your app
+const seed = "Your private key";//process.env.PRIVATE_KEY; //private key/seed (keep private / store in .env file for production)
+const uniqueAppId = "1acd"; //process.env.appID; //your app id assigned by Kin - you can use 1acd for testing
+const maxKinSendable = 50; //just for your security - set max Kin you allow from your server to your app
 const port = process.env.PORT;//if using Heroku: 5000 for localhost and automatic- Else set for your use
 //END MODIFY THIS FOR YOUR ENVIRONMENT
 
@@ -11,7 +11,6 @@ const kin = new KinWrapper(seed, isProduction, uniqueAppId);//initialize
 const http = require('http');
 const qs = require('querystring');
 const utf8 = require('utf8');
-
 
 //create a server object:
 const server = http.createServer();
@@ -50,10 +49,12 @@ async function handleRequest(get, post, res) {
     var response = standardResponse;
     if (typeof get.fund !== 'undefined') {
         //fund a newly created account
-        response = await fundAccount(post.address, post.memo, post.amount, res);
+        if (post.amount < maxKinSendable)
+            response = await fundAccount(post.address, post.memo, post.amount, res);
     } else if (typeof get.request !== 'undefined') {
         //send a payment to an account
-        response = await sendPayment(post.address, post.id, post.memo, post.amount, res);
+        if (post.amount < maxKinSendable)
+            response = await sendPayment(post.address, post.id, post.memo, post.amount, res);
     } else if (typeof get.whitelist !== 'undefined') {
         //Whitelist a transaction
         response = await whitelistTransaction(post, res);
@@ -64,12 +65,14 @@ async function handleRequest(get, post, res) {
     }
 }
 
+function bin2String(array) {
+    return String.fromCharCode.apply(String, array);
+}
 
 //Whitelists transactions so fees are zero
 function whitelistTransaction(data, res) {
     var response = standardResponse();
-    //this line is just returning blank so we just hack it below: clientTransaction = utf8.encode(data);
-    clientTransaction = JSON.parse(JSON.stringify(data));
+    clientTransaction = JSON.stringify(data);
     try {
         response.text = kin.account.whitelistTransaction(clientTransaction);
     } catch (err) {
